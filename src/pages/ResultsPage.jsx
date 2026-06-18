@@ -1,5 +1,13 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
+import NotesPanel from "../components/results/NotesPanel";
+import SummaryPanel from "../components/results/SummaryPanel";
+import DefinitionsPanel from "../components/results/DefinitionsPanel";
+import FlashcardsPanel from "../components/results/FlashcardsPanel";
+import QuizPanel from "../components/results/QuizPanel";
+import FormulasPanel from "../components/results/FormulasPanel";
+import DiagramsPanel from "../components/results/DiagramsPanel";
+import RevisionPanel from "../components/results/RevisionPanel";
 
 export default function ResultsPage() {
     const [activeTab, setActiveTab] = useState("notes");
@@ -137,105 +145,21 @@ export default function ResultsPage() {
                             borderRadius: "16px",
                         }}
                     >
-                        {activeTab === "notes" && (
-                            <>
-                                <h2>Detailed Notes</h2>
+                        {activeTab === "notes" && <NotesPanel />}
 
-                                <p>
-                                    Neural networks are computational models inspired by the
-                                    human brain. They consist of layers of interconnected
-                                    neurons that process information.
-                                </p>
+                        {activeTab === "summary" && <SummaryPanel />}
 
-                                <p>
-                                    Training occurs through backpropagation, where errors
-                                    are propagated backward to update weights.
-                                </p>
-                            </>
-                        )}
+                        {activeTab === "definitions" && <DefinitionsPanel />}
 
-                        {activeTab === "summary" && (
-                            <>
-                                <h2>Quick Summary</h2>
+                        {activeTab === "formulas" && <FormulasPanel />}
 
-                                <ul>
-                                    <li>Neural networks learn patterns from data.</li>
-                                    <li>They contain input, hidden and output layers.</li>
-                                    <li>Backpropagation updates weights.</li>
-                                </ul>
-                            </>
-                        )}
+                        {activeTab === "diagrams" && <DiagramsPanel />}
 
-                        {activeTab === "definitions" && (
-                            <>
-                                <h2>Definitions</h2>
+                        {activeTab === "flashcards" && <FlashcardsPanel />}
 
-                                <ul>
-                                    <li><strong>Neuron:</strong> Basic processing unit.</li>
-                                    <li><strong>Weight:</strong> Connection strength.</li>
-                                    <li><strong>Epoch:</strong> One full training cycle.</li>
-                                </ul>
-                            </>
-                        )}
+                        {activeTab === "quiz" && <QuizPanel />}
 
-                        {activeTab === "formulas" && (
-                            <>
-                                <h2>Formulas</h2>
-
-                                <p>Output = Activation(Wx + b)</p>
-                            </>
-                        )}
-
-                        {activeTab === "diagrams" && (
-                            <>
-                                <h2>Diagrams</h2>
-
-                                <p>
-                                    Input Layer → Hidden Layer → Output Layer
-                                </p>
-                            </>
-                        )}
-
-                        {activeTab === "flashcards" && (
-                            <>
-                                <h2>Flashcards</h2>
-
-                                <div
-                                    style={{
-                                        padding: "20px",
-                                        background: "white",
-                                        borderRadius: "12px",
-                                    }}
-                                >
-                                    What is backpropagation?
-                                </div>
-                            </>
-                        )}
-
-                        {activeTab === "quiz" && (
-                            <>
-                                <h2>Quiz</h2>
-
-                                <p>
-                                    Which algorithm is commonly used to train neural
-                                    networks?
-                                </p>
-
-                                <button>Backpropagation</button>
-                            </>
-                        )}
-
-                        {activeTab === "revision" && (
-                            <>
-                                <h2>Revision Plan</h2>
-
-                                <ul>
-                                    <li>Review notes today</li>
-                                    <li>Practice flashcards tomorrow</li>
-                                    <li>Take quiz after 3 days</li>
-                                </ul>
-                            </>
-                        )}
+                        {activeTab === "revision" && <RevisionPanel />}
                     </div>
                 </div>
             </main>

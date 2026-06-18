@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import UploadHero from "../components/UploadHero";
 
 export default function UploadPage() {
+    const [fileName, setFileName] = useState("");
+
     return (
         <div
             style={{
@@ -9,8 +12,8 @@ export default function UploadPage() {
                 display: "flex",
             }}
         >
-            <Sidebar />
-            <UploadHero />
+            <Sidebar fileName={fileName} setFileName={setFileName} />
+            <UploadHero hasFile={!!fileName} />
         </div>
     );
 }

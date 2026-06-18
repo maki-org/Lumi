@@ -1,20 +1,34 @@
-export default function Dropzone() {
+export default function Dropzone({ fileName, setFileName }) {
+    function handleFileChange(event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            setFileName(file.name);
+        }
+    }
+
     return (
-        <div
+        <label
             style={{
+                display: "block",
                 border: "2px dashed var(--line)",
                 borderRadius: "var(--r)",
                 padding: "30px 20px",
                 textAlign: "center",
                 marginTop: "12px",
+                cursor: "pointer",
+                background: fileName ? "var(--correct-soft)" : "white",
             }}
         >
-            <div
-                style={{
-                    fontSize: "32px",
-                }}
-            >
-                📁
+            <input
+                type="file"
+                accept=".wav,.mp3,audio/*"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+            />
+
+            <div style={{ fontSize: "32px" }}>
+                {fileName ? "✅" : "📁"}
             </div>
 
             <div
@@ -23,7 +37,7 @@ export default function Dropzone() {
                     marginTop: "10px",
                 }}
             >
-                Click or drag a file here
+                {fileName || "Click or drag a file here"}
             </div>
 
             <div
@@ -33,8 +47,8 @@ export default function Dropzone() {
                     fontSize: "12px",
                 }}
             >
-                WAV or MP3, up to 90 minutes
+                {fileName ? "Ready to process" : "WAV or MP3, up to 90 minutes"}
             </div>
-        </div>
+        </label>
     );
 }

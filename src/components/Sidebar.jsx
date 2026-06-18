@@ -1,7 +1,7 @@
 import Brand from "./Brand";
 import Dropzone from "./Dropzone";
 import { useNavigate } from "react-router-dom";
-export default function Sidebar() {
+export default function Sidebar({ fileName, setFileName }) {
     const navigate = useNavigate();
     return (
         <aside
@@ -30,8 +30,9 @@ export default function Sidebar() {
                 >
                     Enter Audio
                 </div>
-                <Dropzone />
+                <Dropzone fileName={fileName} setFileName={setFileName} />
                 <button
+                    onClick={() => setFileName("Lecture12_WorkEnergyPower.mp3")}
                     style={{
                         marginTop: 10,
                         color: "var(--sky)",

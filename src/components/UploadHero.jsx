@@ -1,13 +1,13 @@
 import { Icon } from "./Icons";
 const KIT = [
-    "Detailed Notes",
-    "Quick Summary",
-    "Definitions",
-    "Formulas",
-    "Diagrams",
-    "Flashcards",
-    "Practice Quiz",
-    "Revision Plan",
+    { label: "Detailed Notes", icon: Icon.notes },
+    { label: "Quick Summary", icon: Icon.list },
+    { label: "Definitions", icon: Icon.book },
+    { label: "Formulas", icon: Icon.sigma },
+    { label: "Diagrams", icon: Icon.shapes },
+    { label: "Flashcards", icon: Icon.cards },
+    { label: "Practice Quiz", icon: Icon.quiz },
+    { label: "Revision Plan", icon: Icon.refresh },
 ];
 export default function UploadHero() {
     return (
@@ -91,10 +91,10 @@ export default function UploadHero() {
                                     marginBottom: "8px",
                                 }}
                             >
-                                📚
+                                <item.icon size={24} />
                             </div>
 
-                            <div>{item}</div>
+                            <div>{item.label}</div>
                         </div>
                     ))}
                 </div>

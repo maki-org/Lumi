@@ -52,13 +52,15 @@ export default function Sidebar({ fileName, setFileName }) {
             </div>
             <button
                 onClick={() => navigate("/processing")}
+                disabled={!fileName}
                 style={{
                     padding: "14px",
                     borderRadius: "var(--r)",
-                    background: "var(--olive)",
+                    background: fileName ? "var(--olive)" : "#c4ceac",
                     color: "white",
                     fontWeight: 600,
                     marginTop: 10,
+                    cursor: fileName ? "pointer" : "not-allowed",
                 }}
             >
                 Create Study Kit

@@ -1,3 +1,4 @@
+import { Icon } from "./Icons";
 export default function Dropzone({ fileName, setFileName }) {
     function handleFileChange(event) {
         const file = event.target.files[0];
@@ -28,7 +29,7 @@ export default function Dropzone({ fileName, setFileName }) {
             />
 
             <div style={{ fontSize: "32px" }}>
-                {fileName ? "✅" : "📁"}
+                {fileName ? <Icon.check size={28} /> : <Icon.upload size={28} />}
             </div>
 
             <div

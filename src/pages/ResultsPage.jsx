@@ -8,6 +8,7 @@ import QuizPanel from "../components/results/QuizPanel";
 import FormulasPanel from "../components/results/FormulasPanel";
 import DiagramsPanel from "../components/results/DiagramsPanel";
 import RevisionPanel from "../components/results/RevisionPanel";
+import { LECTURE } from "../data/lecture";
 
 export default function ResultsPage() {
     const [activeTab, setActiveTab] = useState("notes");
@@ -56,7 +57,7 @@ export default function ResultsPage() {
                             marginBottom: "8px",
                         }}
                     >
-                        Introduction to Neural Networks
+                        {LECTURE.title}
                     </h1>
 
                     <p
@@ -64,7 +65,7 @@ export default function ResultsPage() {
                             color: "var(--ink-soft)",
                         }}
                     >
-                        Machine Learning • 42 min • 18 concepts
+                        {LECTURE.course} • {LECTURE.duration} • {LECTURE.concepts} concepts
                     </p>
 
                     <div

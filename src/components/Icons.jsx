@@ -69,7 +69,12 @@ const Icon = {
             <path d="M8 3h11a2 2 0 0 1 2 2v11" />
         </Ic>
     ),
-
+    shapes: (p) => (
+        <Ic {...p}>
+            <circle cx="8" cy="8" r="4.5" />
+            <rect x="13" y="12" width="8" height="8" rx="1.5" />
+        </Ic>
+    ),
     quiz: (p) => (
         <Ic {...p}>
             <circle cx="12" cy="12" r="9.5" />

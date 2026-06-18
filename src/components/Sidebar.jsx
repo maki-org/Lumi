@@ -1,0 +1,67 @@
+import Brand from "./Brand";
+import Dropzone from "./Dropzone";
+import { useNavigate } from "react-router-dom";
+export default function Sidebar() {
+    const navigate = useNavigate();
+    return (
+        <aside
+            style={{
+                width: 312,
+                flexShrink: 0,
+                background:
+                    "linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-2) 100%)",
+                borderRight: "1px solid var(--line)",
+                display: "flex",
+                flexDirection: "column",
+                padding: "22px",
+                gap: "22px",
+            }}
+        >
+            <Brand />
+
+            <div>
+                <div
+                    style={{
+                        color: "var(--olive)",
+                        fontWeight: 600,
+                        fontSize: "12px",
+                        textTransform: "uppercase",
+                    }}
+                >
+                    Enter Audio
+                </div>
+                <Dropzone />
+                <button
+                    style={{
+                        marginTop: 10,
+                        color: "var(--sky)",
+                        fontWeight: 700,
+                    }}
+                >
+                    ↳ Use sample audio
+                </button>
+                <div
+                    style={{
+                        color: "var(--ink-soft)",
+                        marginTop: 4,
+                    }}
+                >
+                    Voice sample · WAV or MP3
+                </div>
+            </div>
+            <button
+                onClick={() => navigate("/processing")}
+                style={{
+                    padding: "14px",
+                    borderRadius: "var(--r)",
+                    background: "var(--olive)",
+                    color: "white",
+                    fontWeight: 600,
+                    marginTop: 10,
+                }}
+            >
+                Create Study Kit
+            </button>
+        </aside>
+    );
+}

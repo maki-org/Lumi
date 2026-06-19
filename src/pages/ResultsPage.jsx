@@ -24,16 +24,10 @@ export default function ResultsPage() {
         { id: "revision", label: "Revision" },
     ];
 
-    const activeLabel =
-        tabs.find((tab) => tab.id === activeTab)?.label || "";
+
 
     return (
-        <div
-            style={{
-                height: "100vh",
-                display: "flex",
-            }}
-        >
+        <div className="app-shell">
             <Sidebar />
 
             <main

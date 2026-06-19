@@ -101,3 +101,33 @@ button {
   border: none;
   background: none;
 }
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+}
+
+.sidebar {
+  width: 312px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg,
+      var(--sidebar) 0%,
+      var(--sidebar-2) 100%);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  gap: 22px;
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+}

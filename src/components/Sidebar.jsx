@@ -1,22 +1,10 @@
 import Brand from "./Brand";
 import Dropzone from "./Dropzone";
 import { useNavigate } from "react-router-dom";
-export default function Sidebar({ fileName, setFileName }) {
+export default function Sidebar({ fileName = "", setFileName = () => { } }) {
     const navigate = useNavigate();
     return (
-        <aside
-            style={{
-                width: 312,
-                flexShrink: 0,
-                background:
-                    "linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-2) 100%)",
-                borderRight: "1px solid var(--line)",
-                display: "flex",
-                flexDirection: "column",
-                padding: "22px",
-                gap: "22px",
-            }}
-        >
+        <aside className="sidebar">
             <Brand />
 
             <div>

@@ -6,12 +6,7 @@ export default function UploadPage() {
     const [fileName, setFileName] = useState("");
 
     return (
-        <div
-            style={{
-                height: "100vh",
-                display: "flex",
-            }}
-        >
+        <div className="app-shell">
             <Sidebar fileName={fileName} setFileName={setFileName} />
             <UploadHero hasFile={!!fileName} />
         </div>

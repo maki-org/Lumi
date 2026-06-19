@@ -77,7 +77,7 @@ export default function UploadHero() {
                 >
                     {KIT.map((item) => (
                         <div
-                            key={item}
+                            key={item.label}
                             style={{
                                 background: "white",
                                 border: "1px solid var(--line-soft)",

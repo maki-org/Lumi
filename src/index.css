@@ -122,12 +122,29 @@ button {
 
 @media (max-width: 768px) {
   .app-shell {
+    width: 100%;
+    overflow-x: hidden;
     flex-direction: column;
   }
 
   .sidebar {
+    box-sizing: border-box;
     width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--line);
+  }
+
+  main {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 22px !important;
+  }
+
+  h1 {
+    font-size: 30px !important;
+  }
+
+  .kit-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }

@@ -142,7 +142,7 @@ export const LECTURE = {
 
     // ---- Revision plan ----
     revision: [
-        { when: "Today", title: "First review", desc: "Read detailed notes + flip all 6 flashcards", done: true },
+        { when: "Today", title: "First review", desc: "Read detailed notes + flip all 6 flashcards", done: false },
         { when: "Tomorrow", title: "Active recall", desc: "Take the 5-question quiz without notes", done: false },
         { when: "In 3 days", title: "Formula drill", desc: "Re-derive all 5 formulas from memory", done: false },
         { when: "In 1 week", title: "Spaced repeat", desc: "Full flashcard deck + weak-spot definitions", done: false },

@@ -11,16 +11,20 @@ export default function Brand({ compact = false }) {
         >
             <div
                 style={{
-                    width: 34,
-                    height: 34,
-                    borderRadius: 11,
-                    background: "var(--olive)",
-                    display: "grid",
-                    placeItems: "center",
-                    color: "#eaf0d6",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
                 }}
             >
-                <Icon.spark size={19} />
+                <img
+                    src="/logo.svg"
+                    alt="Wynaut Labs logo"
+                    style={{
+                        width: "38px",
+                        height: "38px",
+                        objectFit: "contain",
+                    }}
+                />
             </div>
 
             {!compact && (
@@ -31,17 +35,10 @@ export default function Brand({ compact = false }) {
                             fontSize: "19px",
                         }}
                     >
-                        Lumi
+                        Wynaut Labs
                     </div>
 
-                    <div
-                        style={{
-                            fontSize: "11px",
-                            letterSpacing: ".04em",
-                        }}
-                    >
-                        LEARNING PLAYGROUND
-                    </div>
+
                 </div>
             )}
         </div>

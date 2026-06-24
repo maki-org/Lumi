@@ -1,10 +1,17 @@
 import { useState } from "react";
-import { LECTURE } from "../../data/lecture";
 
-const initialTasks = LECTURE.revision;
-
-export default function RevisionPanel() {
+export default function RevisionPanel({ report }) {
+    const initialTasks = report?.revision || [];
     const [tasks, setTasks] = useState(initialTasks);
+
+    if (tasks.length === 0) {
+        return (
+            <>
+                <h2>Revision Plan</h2>
+                <p>No revision plan available.</p>
+            </>
+        );
+    }
 
     function toggleTask(index) {
         setTasks((prev) =>
@@ -21,7 +28,7 @@ export default function RevisionPanel() {
             <div style={{ marginTop: "20px" }}>
                 {tasks.map((task, index) => (
                     <div
-                        key={task.title}
+                        key={`${task.when}-${task.title}`}
                         style={{
                             display: "flex",
                             alignItems: "center",
@@ -53,6 +60,16 @@ export default function RevisionPanel() {
                             <div style={{ color: "var(--ink-soft)" }}>
                                 {task.when}
                             </div>
+
+                            <p
+                                style={{
+                                    marginTop: "4px",
+                                    marginBottom: 0,
+                                    color: "var(--ink-faint)",
+                                }}
+                            >
+                                {task.desc}
+                            </p>
                         </div>
                     </div>
                 ))}

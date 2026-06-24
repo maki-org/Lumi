@@ -1,6 +1,4 @@
-import { LECTURE } from "../../data/lecture";
-
-function Formula({ parts }) {
+function Formula({ parts = [] }) {
     return (
         <span>
             {parts.map((part, index) => {
@@ -30,7 +28,18 @@ function Formula({ parts }) {
     );
 }
 
-export default function FormulasPanel() {
+export default function FormulasPanel({ report }) {
+    const formulas = report?.formulas || [];
+
+    if (formulas.length === 0) {
+        return (
+            <>
+                <h2>Formulas</h2>
+                <p>No formulas available for this lecture.</p>
+            </>
+        );
+    }
+
     return (
         <>
             <h2>Formulas</h2>
@@ -42,7 +51,7 @@ export default function FormulasPanel() {
                     marginTop: "20px",
                 }}
             >
-                {LECTURE.formulas.map((formula) => (
+                {formulas.map((formula) => (
                     <div
                         key={formula.name}
                         style={{

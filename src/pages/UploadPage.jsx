@@ -1,14 +1,11 @@
-import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import UploadHero from "../components/UploadHero";
 
-export default function UploadPage() {
-    const [fileName, setFileName] = useState("");
-
+export default function UploadPage({ file, setFile }) {
     return (
         <div className="app-shell">
-            <Sidebar fileName={fileName} setFileName={setFileName} />
-            <UploadHero hasFile={!!fileName} />
+            <Sidebar file={file} setFile={setFile} />
+            <UploadHero />
         </div>
     );
 }

@@ -8,23 +8,22 @@ import QuizPanel from "../components/results/QuizPanel";
 import FormulasPanel from "../components/results/FormulasPanel";
 import DiagramsPanel from "../components/results/DiagramsPanel";
 import RevisionPanel from "../components/results/RevisionPanel";
-import { LECTURE } from "../data/lecture";
 
-export default function ResultsPage() {
+export default function ResultsPage({ report }) {
     const [activeTab, setActiveTab] = useState("notes");
 
     const tabs = [
         { id: "notes", label: "Detailed Notes" },
         { id: "summary", label: "Summary" },
         { id: "definitions", label: "Definitions" },
-        { id: "formulas", label: "Formulas" },
+        ...(report?.formulas?.length
+            ? [{ id: "formulas", label: "Formulas" }]
+            : []),
         { id: "diagrams", label: "Diagrams" },
         { id: "flashcards", label: "Flashcards" },
         { id: "quiz", label: "Quiz" },
         { id: "revision", label: "Revision" },
     ];
-
-
 
     return (
         <div className="app-shell">
@@ -45,21 +44,13 @@ export default function ResultsPage() {
                         padding: "24px",
                     }}
                 >
-                    <h1
-                        style={{
-                            fontSize: "32px",
-                            marginBottom: "8px",
-                        }}
-                    >
-                        {LECTURE.title}
+                    <h1 style={{ fontSize: "32px", marginBottom: "8px" }}>
+                        {report?.title || "Generated Study Kit"}
                     </h1>
 
-                    <p
-                        style={{
-                            color: "var(--ink-soft)",
-                        }}
-                    >
-                        {LECTURE.course} • {LECTURE.duration} • {LECTURE.concepts} concepts
+                    <p style={{ color: "var(--ink-soft)" }}>
+                        {report?.course || "Course"} • {report?.duration || "00:00"} •{" "}
+                        {report?.concepts || 0} concepts
                     </p>
 
                     <div
@@ -118,13 +109,9 @@ export default function ResultsPage() {
                                     borderRadius: "12px",
                                     border: "1px solid var(--line)",
                                     background:
-                                        activeTab === tab.id
-                                            ? "var(--olive)"
-                                            : "white",
+                                        activeTab === tab.id ? "var(--olive)" : "white",
                                     color:
-                                        activeTab === tab.id
-                                            ? "white"
-                                            : "var(--ink)",
+                                        activeTab === tab.id ? "white" : "var(--ink)",
                                 }}
                             >
                                 {tab.label}
@@ -140,21 +127,25 @@ export default function ResultsPage() {
                             borderRadius: "16px",
                         }}
                     >
-                        {activeTab === "notes" && <NotesPanel />}
+                        {activeTab === "notes" && <NotesPanel report={report} />}
 
-                        {activeTab === "summary" && <SummaryPanel />}
+                        {activeTab === "summary" && <SummaryPanel report={report} />}
 
-                        {activeTab === "definitions" && <DefinitionsPanel />}
+                        {activeTab === "definitions" && (
+                            <DefinitionsPanel report={report} />
+                        )}
 
-                        {activeTab === "formulas" && <FormulasPanel />}
+                        {activeTab === "formulas" && <FormulasPanel report={report} />}
 
-                        {activeTab === "diagrams" && <DiagramsPanel />}
+                        {activeTab === "diagrams" && <DiagramsPanel report={report} />}
 
-                        {activeTab === "flashcards" && <FlashcardsPanel />}
+                        {activeTab === "flashcards" && (
+                            <FlashcardsPanel report={report} />
+                        )}
 
-                        {activeTab === "quiz" && <QuizPanel />}
+                        {activeTab === "quiz" && <QuizPanel report={report} />}
 
-                        {activeTab === "revision" && <RevisionPanel />}
+                        {activeTab === "revision" && <RevisionPanel report={report} />}
                     </div>
                 </div>
             </main>

@@ -1,15 +1,19 @@
-import { LECTURE } from "../../data/lecture";
+export default function SummaryPanel({ report }) {
+    const summary = report?.summary || [];
 
-export default function SummaryPanel() {
     return (
         <>
             <h2>Summary</h2>
 
-            <ul>
-                {LECTURE.summary.map((point) => (
-                    <li key={point}>{point}</li>
-                ))}
-            </ul>
+            {summary.length === 0 ? (
+                <p>No summary available.</p>
+            ) : (
+                <ul>
+                    {summary.map((point) => (
+                        <li key={point}>{point}</li>
+                    ))}
+                </ul>
+            )}
         </>
     );
 }

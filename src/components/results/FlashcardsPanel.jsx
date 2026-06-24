@@ -1,11 +1,20 @@
 import { useState } from "react";
-import { LECTURE } from "../../data/lecture";
 
-export default function FlashcardsPanel() {
+export default function FlashcardsPanel({ report }) {
+    const cards = report?.flashcards || [];
+
     const [index, setIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
 
-    const cards = LECTURE.flashcards;
+    if (cards.length === 0) {
+        return (
+            <>
+                <h2>Flashcards</h2>
+                <p>No flashcards available.</p>
+            </>
+        );
+    }
+
     const card = cards[index];
 
     function nextCard() {
@@ -16,6 +25,10 @@ export default function FlashcardsPanel() {
     return (
         <>
             <h2>Flashcards</h2>
+
+            <p style={{ marginTop: "8px", color: "var(--ink-soft)" }}>
+                Card {index + 1} of {cards.length}
+            </p>
 
             <div
                 onClick={() => setShowAnswer(!showAnswer)}

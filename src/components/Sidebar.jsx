@@ -1,7 +1,7 @@
 import Brand from "./Brand";
 import Dropzone from "./Dropzone";
 import { useNavigate } from "react-router-dom";
-export default function Sidebar({ fileName = "", setFileName = () => { } }) {
+export default function Sidebar({ file = null, setFile = () => { } }) {
     const navigate = useNavigate();
     return (
         <aside className="sidebar">
@@ -18,9 +18,14 @@ export default function Sidebar({ fileName = "", setFileName = () => { } }) {
                 >
                     Enter Audio
                 </div>
-                <Dropzone fileName={fileName} setFileName={setFileName} />
+                <Dropzone file={file} setFile={setFile} />
                 <button
-                    onClick={() => setFileName("Lecture12_WorkEnergyPower.mp3")}
+                    onClick={() =>
+                        setFile({
+                            name: "Lecture12_WorkEnergyPower.mp3",
+                            isSample: true,
+                        })
+                    }
                     style={{
                         marginTop: 10,
                         color: "var(--sky)",
@@ -40,15 +45,15 @@ export default function Sidebar({ fileName = "", setFileName = () => { } }) {
             </div>
             <button
                 onClick={() => navigate("/processing")}
-                disabled={!fileName}
+                disabled={!file}
                 style={{
                     padding: "14px",
                     borderRadius: "var(--r)",
-                    background: fileName ? "var(--olive)" : "#c4ceac",
+                    background: file ? "var(--olive)" : "#c4ceac",
                     color: "white",
                     fontWeight: 600,
                     marginTop: 10,
-                    cursor: fileName ? "pointer" : "not-allowed",
+                    cursor: file ? "pointer" : "not-allowed",
                 }}
             >
                 Create Study Kit

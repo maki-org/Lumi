@@ -1,12 +1,22 @@
 import { useState } from "react";
-import { LECTURE } from "../../data/lecture";
 
-export default function QuizPanel() {
+export default function QuizPanel({ report }) {
+    const questions = report?.quiz || [];
+
     const [questionIndex, setQuestionIndex] = useState(0);
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
 
-    const question = LECTURE.quiz[questionIndex];
+    if (questions.length === 0) {
+        return (
+            <>
+                <h2>Quiz</h2>
+                <p>No quiz available.</p>
+            </>
+        );
+    }
+
+    const question = questions[questionIndex];
 
     function chooseAnswer(index) {
         if (submitted) return;
@@ -16,12 +26,16 @@ export default function QuizPanel() {
     function nextQuestion() {
         setSelected(null);
         setSubmitted(false);
-        setQuestionIndex((prev) => (prev + 1) % LECTURE.quiz.length);
+        setQuestionIndex((prev) => (prev + 1) % questions.length);
     }
 
     return (
         <>
             <h2>Quiz</h2>
+
+            <p style={{ marginTop: "8px", color: "var(--ink-soft)" }}>
+                Question {questionIndex + 1} of {questions.length}
+            </p>
 
             <p style={{ marginTop: "12px", marginBottom: "20px" }}>
                 {question.q}
@@ -31,7 +45,8 @@ export default function QuizPanel() {
                 {question.options.map((option, index) => {
                     const isSelected = selected === index;
                     const isCorrect = submitted && index === question.correct;
-                    const isWrong = submitted && isSelected && index !== question.correct;
+                    const isWrong =
+                        submitted && isSelected && index !== question.correct;
 
                     return (
                         <button

@@ -1,11 +1,17 @@
 import { Icon } from "./Icons";
-export default function Dropzone({ fileName, setFileName }) {
-    function handleFileChange(event) {
-        const file = event.target.files[0];
 
-        if (file) {
-            setFileName(file.name);
+export default function Dropzone({ file, setFile }) {
+    function handleFileChange(event) {
+        const selectedFile = event.target.files[0];
+
+        if (!selectedFile) return;
+
+        if (selectedFile.size > 25 * 1024 * 1024) {
+            alert("File must be smaller than 25MB");
+            return;
         }
+
+        setFile(selectedFile);
     }
 
     return (
@@ -18,7 +24,7 @@ export default function Dropzone({ fileName, setFileName }) {
                 textAlign: "center",
                 marginTop: "12px",
                 cursor: "pointer",
-                background: fileName ? "var(--correct-soft)" : "white",
+                background: file ? "var(--correct-soft)" : "white",
             }}
         >
             <input
@@ -29,7 +35,7 @@ export default function Dropzone({ fileName, setFileName }) {
             />
 
             <div style={{ fontSize: "32px" }}>
-                {fileName ? <Icon.check size={28} /> : <Icon.upload size={28} />}
+                {file ? <Icon.check size={28} /> : <Icon.upload size={28} />}
             </div>
 
             <div
@@ -38,7 +44,7 @@ export default function Dropzone({ fileName, setFileName }) {
                     marginTop: "10px",
                 }}
             >
-                {fileName || "Click or drag a file here"}
+                {file?.name || "Click or drag a file here"}
             </div>
 
             <div
@@ -48,7 +54,7 @@ export default function Dropzone({ fileName, setFileName }) {
                     fontSize: "12px",
                 }}
             >
-                {fileName ? "Ready to process" : "WAV or MP3, up to 90 minutes"}
+                {file ? "Ready to process" : "WAV or MP3, up to 90 minutes"}
             </div>
         </label>
     );

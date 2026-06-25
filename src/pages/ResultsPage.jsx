@@ -7,7 +7,7 @@ import FlashcardsPanel from "../components/results/FlashcardsPanel";
 import QuizPanel from "../components/results/QuizPanel";
 import FormulasPanel from "../components/results/FormulasPanel";
 import DiagramsPanel from "../components/results/DiagramsPanel";
-import RevisionPanel from "../components/results/RevisionPanel";
+import Todopanel from "../components/results/Todopanel";
 
 export default function ResultsPage({ report }) {
     const [activeTab, setActiveTab] = useState("notes");
@@ -22,7 +22,7 @@ export default function ResultsPage({ report }) {
         { id: "diagrams", label: "Diagrams" },
         { id: "flashcards", label: "Flashcards" },
         { id: "quiz", label: "Quiz" },
-        { id: "revision", label: "Revision" },
+        { id: "todo", label: "To-do List" },
     ];
 
     return (
@@ -108,7 +108,7 @@ export default function ResultsPage({ report }) {
 
                         {activeTab === "quiz" && <QuizPanel report={report} />}
 
-                        {activeTab === "revision" && <RevisionPanel report={report} />}
+                        {activeTab === "todo" && <Todopanel report={report} />}
                     </div>
                 </div>
             </main>

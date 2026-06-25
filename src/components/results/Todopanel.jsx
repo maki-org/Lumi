@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-export default function RevisionPanel({ report }) {
+export default function Todopanel({ report }) {
     const initialTasks = report?.revision || [];
     const [tasks, setTasks] = useState(initialTasks);
 
     if (tasks.length === 0) {
         return (
             <>
-                <h2>Revision Plan</h2>
-                <p>No revision plan available.</p>
+                <h2>To-do List</h2>
+                <p>No To-do list available.</p>
             </>
         );
     }
@@ -23,7 +23,7 @@ export default function RevisionPanel({ report }) {
 
     return (
         <>
-            <h2>Revision Plan</h2>
+            <h2>To-do List</h2>
 
             <div style={{ marginTop: "20px" }}>
                 {tasks.map((task, index) => (

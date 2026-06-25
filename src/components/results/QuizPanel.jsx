@@ -6,6 +6,8 @@ export default function QuizPanel({ report }) {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
+    const [score, setScore] = useState(0);
+    const [isFinished, setIsFinished] = useState(false);
 
     if (questions.length === 0) {
         return (
@@ -23,10 +25,62 @@ export default function QuizPanel({ report }) {
         setSelected(index);
     }
 
+    function submitAnswer() {
+        if (selected === null) return;
+
+        if (selected === question.correct) {
+            setScore((prev) => prev + 1);
+        }
+
+        setSubmitted(true);
+    }
+
     function nextQuestion() {
+        const isLastQuestion = questionIndex === questions.length - 1;
+
+        if (isLastQuestion) {
+            setIsFinished(true);
+            return;
+        }
+
         setSelected(null);
         setSubmitted(false);
-        setQuestionIndex((prev) => (prev + 1) % questions.length);
+        setQuestionIndex((prev) => prev + 1);
+    }
+
+    function restartQuiz() {
+        setQuestionIndex(0);
+        setSelected(null);
+        setSubmitted(false);
+        setScore(0);
+        setIsFinished(false);
+    }
+
+    if (isFinished) {
+        return (
+            <>
+                <h2>Quiz completed</h2>
+
+                <p style={{ marginTop: "12px", color: "var(--ink-soft)" }}>
+                    You scored {score} out of {questions.length}.
+                </p>
+
+                <button
+                    type="button"
+                    onClick={restartQuiz}
+                    style={{
+                        marginTop: "20px",
+                        padding: "12px 20px",
+                        borderRadius: "12px",
+                        background: "var(--olive)",
+                        color: "white",
+                        cursor: "pointer",
+                    }}
+                >
+                    Restart Quiz
+                </button>
+            </>
+        );
     }
 
     return (
@@ -81,7 +135,7 @@ export default function QuizPanel({ report }) {
             {!submitted ? (
                 <button
                     type="button"
-                    onClick={() => setSubmitted(true)}
+                    onClick={submitAnswer}
                     disabled={selected === null}
                     style={{
                         marginTop: "20px",
@@ -108,9 +162,11 @@ export default function QuizPanel({ report }) {
                                     : "var(--wrong-soft)",
                         }}
                     >
-                        {selected === question.correct
-                            ? "✅ Correct!"
-                            : "❌ Incorrect"}
+                        <strong>
+                            {selected === question.correct
+                                ? "Correct"
+                                : "Incorrect"}
+                        </strong>
 
                         <p style={{ marginTop: "8px" }}>
                             {question.explain}
@@ -129,7 +185,9 @@ export default function QuizPanel({ report }) {
                             cursor: "pointer",
                         }}
                     >
-                        Next Question
+                        {questionIndex === questions.length - 1
+                            ? "Finish Quiz"
+                            : "Next Question"}
                     </button>
                 </>
             )}

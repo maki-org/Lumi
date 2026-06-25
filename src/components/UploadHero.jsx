@@ -63,7 +63,7 @@ export default function UploadHero() {
                         lineHeight: 1.6,
                     }}
                 >
-                    Drop a classroom recording and Lumi writes your
+                    Drop a classroom recording and Wy writes your
                     detailed notes, summaries, definitions, formulas,
                     diagrams, flashcards and a quiz — ready in under a minute.
                 </p>

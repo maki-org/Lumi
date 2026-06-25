@@ -53,44 +53,7 @@ export default function ResultsPage({ report }) {
                         {report?.concepts || 0} concepts
                     </p>
 
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "16px",
-                            marginTop: "24px",
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        <div
-                            style={{
-                                padding: "12px 20px",
-                                borderRadius: "16px",
-                                background: "var(--xp-soft)",
-                            }}
-                        >
-                            ⚡ 1250 XP
-                        </div>
 
-                        <div
-                            style={{
-                                padding: "12px 20px",
-                                borderRadius: "16px",
-                                background: "var(--flame-soft)",
-                            }}
-                        >
-                            🔥 7 Day Streak
-                        </div>
-
-                        <div
-                            style={{
-                                padding: "12px 20px",
-                                borderRadius: "16px",
-                                background: "var(--chip)",
-                            }}
-                        >
-                            🎯 82% Mastery
-                        </div>
-                    </div>
 
                     <div
                         style={{

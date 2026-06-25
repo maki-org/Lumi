@@ -17,9 +17,45 @@ export default function FlashcardsPanel({ report }) {
 
     const card = cards[index];
 
+    function flipCard() {
+        setShowAnswer((prev) => !prev);
+    }
+
     function nextCard() {
         setShowAnswer(false);
-        setIndex((prev) => (prev + 1) % cards.length);
+        setIndex((prev) => prev + 1);
+    }
+
+    function restartCards() {
+        setShowAnswer(false);
+        setIndex(0);
+    }
+
+    if (index >= cards.length) {
+        return (
+            <>
+                <h2>Flashcards completed</h2>
+
+                <p style={{ marginTop: "12px", color: "var(--ink-soft)" }}>
+                    You reviewed all {cards.length} flashcards.
+                </p>
+
+                <button
+                    type="button"
+                    onClick={restartCards}
+                    style={{
+                        marginTop: "20px",
+                        padding: "12px 20px",
+                        borderRadius: "12px",
+                        background: "var(--olive)",
+                        color: "white",
+                        cursor: "pointer",
+                    }}
+                >
+                    Review Again
+                </button>
+            </>
+        );
     }
 
     return (
@@ -31,40 +67,171 @@ export default function FlashcardsPanel({ report }) {
             </p>
 
             <div
-                onClick={() => setShowAnswer(!showAnswer)}
+                role="button"
+                tabIndex={0}
+                onClick={flipCard}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        flipCard();
+                    }
+                }}
                 style={{
                     marginTop: "20px",
-                    padding: "32px",
-                    background: "white",
-                    borderRadius: "16px",
-                    border: "1px solid var(--line)",
+                    width: "100%",
+                    minHeight: "230px",
+                    perspective: "1200px",
                     cursor: "pointer",
-                    minHeight: "150px",
-                    display: "grid",
-                    placeItems: "center",
-                    textAlign: "center",
-                    fontWeight: 600,
+                    outline: "none",
                 }}
             >
-                {showAnswer ? card.a : card.q}
+                <div
+                    style={{
+                        position: "relative",
+                        width: "100%",
+                        minHeight: "230px",
+                        transformStyle: "preserve-3d",
+                        transition: "transform 0.6s ease",
+                        transform: showAnswer
+                            ? "rotateY(180deg)"
+                            : "rotateY(0deg)",
+                    }}
+                >
+                    {/* Front */}
+                    <div
+                        style={{
+                            position: "absolute",
+                            inset: 0,
+                            minHeight: "230px",
+                            padding: "36px",
+                            background: "white",
+                            border: "3px solid var(--line)",
+                            outline: "1px solid rgba(0, 0, 0, 0.08)",
+                            borderRadius: "18px",
+                            backfaceVisibility: "hidden",
+                            WebkitBackfaceVisibility: "hidden",
+                            display: "grid",
+                            placeItems: "center",
+                            textAlign: "center",
+                            boxShadow: "0 16px 36px rgba(0, 0, 0, 0.12)",
+                            boxSizing: "border-box",
+                            overflow: "hidden",
+                        }}
+                    >
+                        <div>
+                            <div
+                                style={{
+                                    fontSize: "12px",
+                                    fontWeight: 700,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    color: "var(--olive)",
+                                    marginBottom: "14px",
+                                }}
+                            >
+                                Question
+                            </div>
+
+                            <div
+                                style={{
+                                    fontSize: "20px",
+                                    fontWeight: 700,
+                                    lineHeight: 1.5,
+                                }}
+                            >
+                                {card.q}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Back */}
+                    <div
+                        style={{
+                            position: "absolute",
+                            inset: 0,
+                            minHeight: "230px",
+                            padding: "36px",
+                            background: "white",
+                            border: "3px solid var(--line)",
+                            outline: "1px solid rgba(0, 0, 0, 0.08)",
+                            borderRadius: "18px",
+                            backfaceVisibility: "hidden",
+                            WebkitBackfaceVisibility: "hidden",
+                            transform: "rotateY(180deg)",
+                            display: "grid",
+                            placeItems: "center",
+                            textAlign: "center",
+                            boxShadow: "0 16px 36px rgba(0, 0, 0, 0.12)",
+                            boxSizing: "border-box",
+                            overflow: "hidden",
+                        }}
+                    >
+                        <div>
+                            <div
+                                style={{
+                                    fontSize: "12px",
+                                    fontWeight: 700,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    color: "var(--olive)",
+                                    marginBottom: "14px",
+                                }}
+                            >
+                                Answer
+                            </div>
+
+                            <div
+                                style={{
+                                    fontSize: "20px",
+                                    fontWeight: 700,
+                                    lineHeight: 1.5,
+                                }}
+                            >
+                                {card.a}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <p style={{ marginTop: "10px", color: "var(--ink-soft)" }}>
-                Click the card to flip it.
-            </p>
-
-            <button
-                onClick={nextCard}
+            <div
                 style={{
-                    marginTop: "16px",
-                    padding: "12px 20px",
-                    borderRadius: "12px",
-                    background: "var(--olive)",
-                    color: "white",
+                    display: "flex",
+                    gap: "12px",
+                    marginTop: "24px",
+                    flexWrap: "wrap",
                 }}
             >
-                Next Card
-            </button>
+                <button
+                    type="button"
+                    onClick={flipCard}
+                    style={{
+                        padding: "12px 20px",
+                        borderRadius: "12px",
+                        background: "white",
+                        border: "1px solid var(--line)",
+                        color: "var(--ink)",
+                        cursor: "pointer",
+                    }}
+                >
+                    {showAnswer ? "Show Question" : "Show Answer"}
+                </button>
+
+                <button
+                    type="button"
+                    onClick={nextCard}
+                    style={{
+                        padding: "12px 20px",
+                        borderRadius: "12px",
+                        background: "var(--olive)",
+                        color: "white",
+                        cursor: "pointer",
+                    }}
+                >
+                    {index === cards.length - 1
+                        ? "Finish Flashcards"
+                        : "Next Card"}
+                </button>
+            </div>
         </>
     );
 }

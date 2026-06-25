@@ -22,7 +22,7 @@ export default function Sidebar({ file = null, setFile = () => { } }) {
                 <button
                     onClick={() =>
                         setFile({
-                            name: "Lecture12_WorkEnergyPower.mp3",
+                            name: "Sample Physics Lecture",
                             isSample: true,
                         })
                     }

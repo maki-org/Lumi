@@ -86,9 +86,35 @@ export const LECTURE = {
 
     // ---- Diagrams (described placeholders + labels) ----
     diagrams: [
-        { title: "Pendulum Energy Exchange", caption: "PE → KE → PE across one full swing", labels: ["Max PE", "Max KE", "Max PE"], kind: "pendulum" },
-        { title: "Energy Transfer Chain", caption: "Chemical → Kinetic → Thermal in a moving car", labels: ["Fuel", "Motion", "Heat"], kind: "chain" },
-        { title: "Inclined Plane Forces", caption: "Work done lifting a box up a ramp", labels: ["Force", "Distance", "Height"], kind: "ramp" },
+        {
+            title: "Pendulum Energy Exchange",
+            caption: "Potential energy changes into kinetic energy and back again during one full swing.",
+            code: `flowchart LR
+    A[Left Side: Max Potential Energy] --> B[Middle: Max Kinetic Energy]
+    B --> C[Right Side: Max Potential Energy]
+    C --> B
+    B --> A`,
+        },
+        {
+            title: "Energy Transfer Chain",
+            caption: "Chemical energy in fuel becomes kinetic energy, with some energy lost as heat.",
+            code: `flowchart LR
+    A[Fuel: Chemical Energy] --> B[Engine Converts Energy]
+    B --> C[Car Motion: Kinetic Energy]
+    B --> D[Heat and Sound Energy]
+    C --> E[Useful Movement]
+    D --> F[Energy Loss]`,
+        },
+        {
+            title: "Inclined Plane Forces",
+            caption: "Work is done when force moves a box up a ramp over a distance and raises its height.",
+            code: `flowchart TD
+    A[Applied Force] --> B[Box Moves Up Ramp]
+    B --> C[Distance Along Ramp]
+    B --> D[Gain in Height]
+    D --> E[Increase in Potential Energy]
+    C --> F[Work Done = Force × Distance]`,
+        },
     ],
 
     // ---- Flashcards ----
@@ -142,7 +168,7 @@ export const LECTURE = {
 
     // ---- Revision plan ----
     revision: [
-        { when: "Today", title: "First review", desc: "Read detailed notes + flip all 6 flashcards", done: false },
+        { when: "Today", title: "First review", desc: "Read detailed notes + flip all 6 flashcards", done: true },
         { when: "Tomorrow", title: "Active recall", desc: "Take the 5-question quiz without notes", done: false },
         { when: "In 3 days", title: "Formula drill", desc: "Re-derive all 5 formulas from memory", done: false },
         { when: "In 1 week", title: "Spaced repeat", desc: "Full flashcard deck + weak-spot definitions", done: false },
